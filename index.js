@@ -62,7 +62,7 @@ app.get("/", (req, res) => {
 })
 
 app.post("/csv", upload.single("file"), (req, res) => {
-	const FILEPATH = filePath.resolve(tempDirectory + "\\" +upload.storage.file.originalname)
+	const FILEPATH = filePath.resolve(tempDirectory + "/" +upload.storage.file.originalname)
 	// console.log(upload.storage.file.fieldname, FILEPATH)
 	
 	csv_file = FILEPATH
