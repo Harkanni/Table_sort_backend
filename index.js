@@ -47,10 +47,7 @@ const upload = multer({storage: storage})
 console.log(CSV_TO_JSON)
 
 app.get("/", (req, res) => {
-	CSV_TO_JSON().fromFile(csv_file).then(source => {
-		// res.send(source)
-	})
-	res.send("hello")
+	res.json({"greetings": "hello"})
 })
 
 app.post("/csv", upload.single("file"), (req, res) => {
