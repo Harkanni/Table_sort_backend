@@ -1,5 +1,6 @@
 const fs = require("fs")
 const filePath = require("path")
+const os = require("os")
 const express = require("express")
 const app = express()
 const CSV_TO_JSON = require("csvtojson")
@@ -28,9 +29,18 @@ app.use(function(req, res, next) {
     next();
 });
 
+// using the hosts temporary directory to hold the csv file
+if (process.env.DEV && process.env.DEV === 'Yes') {
+  tempDirectory = filePath.join(__dirname, `../../tmp/`);
+} else {
+  tempDirectory = filePath.join(os.tmpdir())
+}
+// tempDirectory = filePath.join(os.tmpdir())
+
 var storage = multer.diskStorage({
 	destination: function(request, file, callback){
-		callback(null, "./Uploads")
+		callback(null, tempDirectory)
+		// callback(null, "./Uploads")
 	},
 
 	filename: function(request, file, callback){
@@ -44,6 +54,7 @@ var storage = multer.diskStorage({
 const upload = multer({storage: storage})
 
 
+
 console.log(CSV_TO_JSON)
 
 app.get("/", (req, res) => {
@@ -51,10 +62,11 @@ app.get("/", (req, res) => {
 })
 
 app.post("/csv", upload.single("file"), (req, res) => {
-	const FILEPATH = filePath.resolve("./Uploads/" + upload.storage.file.originalname)
-	console.log(upload.storage.file.fieldname, FILEPATH)
+	const FILEPATH = filePath.resolve(tempDirectory + "\\" +upload.storage.file.originalname)
+	// console.log(upload.storage.file.fieldname, FILEPATH)
 	
 	csv_file = FILEPATH
+	console.log(tempDirectory, FILEPATH)
 
 	if(!FILEPATH){
 		return res.status(400).send({status: 'failed'})
