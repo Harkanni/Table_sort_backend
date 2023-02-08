@@ -30,12 +30,12 @@ app.use(function(req, res, next) {
 });
 
 // using the hosts temporary directory to hold the csv file
-if (process.env.DEV && process.env.DEV === 'Yes') {
-  tempDirectory = filePath.join(__dirname, `../../tmp/`);
-} else {
-  tempDirectory = filePath.join(os.tmpdir())
-}
-// tempDirectory = filePath.join(os.tmpdir())
+// if (process.env.DEV && process.env.DEV === 'Yes') {
+//   tempDirectory = filePath.join(__dirname, `../../tmp/`);
+// } else {
+//   tempDirectory = filePath.join(os.tmpdir())
+// }
+tempDirectory = filePath.join(os.tmpdir())
 
 var storage = multer.diskStorage({
 	destination: function(request, file, callback){
