@@ -71,7 +71,7 @@ app.post("/csv", upload.single("file"), (req, res) => {
 		return res.status(400).send({status: 'failed'})
 	}
 	if (FILE_EXT != ".csv") {
-		return res.status(400).send({message: "Invalid File Format, Ensure its a csv file format"})
+		return res.status(400).send({message: "The file format is invalid: Make sure the file is in csv format and try again. "})
 	}
 
 	// res.status(200).send(csv_file)
