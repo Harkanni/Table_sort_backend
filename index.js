@@ -48,9 +48,6 @@ let storage = multer.diskStorage({
 const upload = multer({storage: storage})
 
 
-
-// console.log(CSV_TO_JSON)
-
 app.get("/", (req, res) => {
 	res.json({"greetings": "hello"})
 })
@@ -63,11 +60,8 @@ app.post("/csv", upload.single("file"), (req, res) => {
 	let FILE_EXT = filePath.extname(upload.storage.file.originalname)
 
 	const csv_file = FILEPATH
-	console.log(tempDirectory, FILEPATH)
-
 
 	if(!FILEPATH){
-		console.log(FILE_EXT)
 		return res.status(400).send({status: 'failed'})
 	}
 	if (FILE_EXT != ".csv") {
