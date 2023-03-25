@@ -31,7 +31,7 @@ app.use(function(req, res, next) {
 
 tempDirectory = filePath.join(os.tmpdir())
 
-var storage = multer.diskStorage({
+let storage = multer.diskStorage({
 	destination: function(request, file, callback){
 		callback(null, tempDirectory)
 		// callback(null, "./Uploads")
@@ -60,7 +60,7 @@ app.post("/csv", upload.single("file"), (req, res) => {
 	// console.log(upload.storage.file.fieldname, FILEPATH)
 	
 
-	var FILE_EXT = filePath.extname(upload.storage.file.originalname)
+	let FILE_EXT = filePath.extname(upload.storage.file.originalname)
 
 	csv_file = FILEPATH
 	console.log(tempDirectory, FILEPATH)
