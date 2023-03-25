@@ -5,7 +5,7 @@ const express = require("express")
 const app = express()
 const CSV_TO_JSON = require("csvtojson")
 const JSON_TO_CSV = require("json2csv")
-var bodyParser = require("body-parser")
+const bodyParser = require("body-parser")
 
 
 // INITIALIZING MULTER
@@ -62,7 +62,7 @@ app.post("/csv", upload.single("file"), (req, res) => {
 
 	let FILE_EXT = filePath.extname(upload.storage.file.originalname)
 
-	csv_file = FILEPATH
+	const csv_file = FILEPATH
 	console.log(tempDirectory, FILEPATH)
 
 
